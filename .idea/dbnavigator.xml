@@ -1,0 +1,994 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DBNavigator.Project.DataEditorManager">
+    <record-view-column-sorting-type value="BY_INDEX" />
+    <value-preview-text-wrapping value="false" />
+    <value-preview-pinned value="false" />
+  </component>
+  <component name="DBNavigator.Project.DatabaseBrowserManager">
+    <autoscroll-to-editor value="false" />
+    <autoscroll-from-editor value="true" />
+    <show-object-properties value="true" />
+    <loaded-nodes />
+  </component>
+  <component name="DBNavigator.Project.DatabaseConsoleManager">
+    <connection id="cf6286bd-63b1-4c7c-b720-c6ed18d592d5">
+      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[--ЛАБОРАТОРНАЯ №1
+create table employees
+(
+    id_e serial primary key,
+    first_name_e varchar(20),
+    last_name_e varchar(20),
+    pather_name_e varchar(20),
+    position_e varchar(50),
+    salary_e int
+);
+
+insert into employees (first_name_e, last_name_e, pather_name_e, position_e, salary_e)
+values
+('Сергей', 'Иванов', 'Петрович', 'Администратор базы данных', 723000),
+('Ольга', 'Смирнова', 'Ивановна', 'Веб-разработчик', 215000),
+('Николай', 'Кузнецов', 'Сергеевич', 'Веб-разработчик', 556000),
+('Александр', 'Альхименко', 'Денисович', 'Системный администратор', 318000),
+('Кирилл', 'Баженов', 'Максимович', 'Full Stack Developer', 429000),
+('Анастасия', 'Горбунова', 'Игоревна', 'Network Engineer', 226000),
+('Анна', 'Васильева', 'Николаевна', 'UX/UI дизайнер', 683000),
+('Григорий', 'Петров', 'Александрович', 'Веб-разработчик', 447000),
+('Павел', 'Емельянов', 'Алексеевич', 'Full Stack Developer', 583000),
+('Никита', 'Ермаков', 'Дмитриевич', 'Системный администратор', 609000),
+('Мария', 'Сергеева', 'Григорьевна', 'Менеджер проекта', 329000),
+('Евгений', 'Новиков', 'Борисович', 'Администратор базы данных', 668000),
+('Екатерина', 'Павлова', 'Сергеевна', 'UX/UI дизайнер', 726000),
+('Игорь', 'Федоров', 'Степанович', 'Веб-разработчик', 593000),
+('Анастасия', 'Александрова', 'Игоревна', 'Веб-разработчик', 302000),
+('Эрдэм', 'Истаев', 'Эрдэниевич', 'Системный администратор', 209000),
+('Владислав', 'Кузьмин', 'Михайлович', 'Machine Learning Engineer', 414000),
+('Дмитрий', 'Малахов', 'Сергеевич', 'Big Data Engineer', 195000),
+('Егор', 'Митьков', 'Максимович', 'Machine Learning Engineer', 472000),
+('Михаил', 'Алексеев', 'Сергеевич', 'Python Developer', 641000),
+('Елена', 'Романова', 'Николаевна', 'Администратор базы данных', 208000),
+('Андрей', 'Орлов', 'Владимирович', 'Администратор базы данных', 568000),
+('Анна', 'Козлова', 'Алексеевна', 'Python Developer', 636000),
+('Сергей', 'Тимофеев', 'Иванович', 'Менеджер проекта', 556000),
+('Виктор', 'Нефедев', 'Константинович', 'Marketing Specialist', 379000),
+('Андрей', 'Поволяев', 'Дмитриевич', 'Marketing Specialist', 198000),
+('Софья', 'Ролецкая', 'Николаевна', 'Big Data Engineer', 311000),
+('Артем', 'Свиридов', 'Валерьевич', 'Machine Learning Engineer', 310000),
+('Александр', 'Семичев', 'Сергеевич', 'Big Data Engineer', 178000),
+('Мария', 'Волкова', 'Григорьевна', 'Java Developer', 424000),
+('Петр', 'Федоров', 'Сергеевич', 'Менеджер проекта', 565000),
+('Татьяна', 'Андреева', 'Ивановна', 'Веб-разработчик', 307000),
+('Владимир', 'Зайцев', 'Сергеевич', 'Веб-разработчик', 406000),
+('Виктория', 'Павлова', 'Александровна', 'iOS Developer', 521000),
+('Анна', 'Тесленко', 'Руслановна', 'Системный аналитик', 817000),
+('Виктория', 'Хураськина', 'Александровна', 'Системный аналитик', 820000),
+('Алексей', 'Чешковский', 'Андреевич', 'DevOps Engineer', 934000);
+
+create table departments
+(
+    id_d serial primary key,
+    name_d varchar(50)
+);
+
+insert into departments (name_d)
+values
+('Отдел разработки ПО'),
+('Отдел управления базами данных'),
+('Отдел управления проектами'),
+('Отдел веб-разработки'),
+('Отдел мобильной разработки'),
+('Отдел машинного обучения'),
+('Отдел аналитики данных'),
+('Отдел управления контентом');
+
+create table project
+(
+    id_p serial primary key,
+    name_p varchar(100),
+    cost_p int,
+    department_id int,
+    date_beg date,
+    date_end date,
+    date_end_real date,
+    foreign key (department_id) references departments(id_d) on delete cascade on update cascade
+);
+
+insert into project (name_p, cost_p, department_id, date_beg, date_end, date_end_real)
+values
+('Построение корпоративной платформы по управлению данными', 2500000, 2, '2020-12-21', '2021-01-22', '2021-02-12'),
+('Информационная система управления метрологической деятельностью', 3120000, 1, '2023-05-03', '2023-06-21', null),
+('Разработка систем искусственного интеллекта и машинного обучения', 4560000, 6, '2018-06-29', '2018-09-26', '2018-09-27'),
+('Разработка мобильных приложений и сервисов Houlinso', 9930000, 3, '2023-06-29', '2023-12-21', null),
+('Оптимизация работы вычислительной системы MathPro', 1500000, 7, null, null, null),
+('Разработка мобильного приложения Rustagram', 1000000000, 5, '2023-09-21', '2025-09-21', null),
+('Оптимизация алгоритма быстрого ответа Yandex', 5560000, 4, null, null, null);
+
+create table departments_employees
+(
+    id serial primary key,
+    department_id int,
+    employee_id int,
+    foreign key (department_id) references departments(id_d) on delete cascade on update cascade,
+    foreign key (employee_id) references employees(id_e) on delete cascade on update cascade
+);
+
+insert into departments_employees (department_id, employee_id)
+values
+(2, 1),
+(4, 2),
+(4, 3),
+(3, 4),
+(1, 5),
+(4, 6),
+(8, 7),
+(4, 8),
+(1, 9),
+(3, 10),
+(3, 11),
+(2, 12),
+(8, 13),
+(4, 14),
+(4, 15),
+(3, 16),
+(6, 17),
+(2, 18),
+(6, 19),
+(1, 20),
+(5, 23),
+(5, 26),
+(5, 34);
+
+select * from employees;
+select * from departments;
+select * from project;
+select * from departments_employees;
+
+
+select employees.*, departments_employees.department_id
+from employees
+join departments_employees on departments_employees.employee_id = employees.id_e
+
+--drop table if exists project cascade;
+
+--ЛАБОРАТОРНАЯ №2
+--Выборка данных
+--Пункт 1
+select count(*)
+from project
+where project.date_end_real < now();
+--Пункт 2
+select project.name_p, employees.last_name_e, employees.first_name_e, employees.pather_name_e, employees.salary_e
+from project
+left join departments_employees on project.department_id = departments_employees.department_id
+left join employees on departments_employees.employee_id = employees.id_e
+order by project.name_p;
+--Пункт 3
+select project.name_p, project.cost_p - sum(employees.salary_e) * ((project.date_end - project.date_beg) / 31) as profit
+from project
+left join departments_employees on project.department_id = departments_employees.department_id
+left join employees on departments_employees.employee_id = employees.id_e
+group by project.name_p, project.date_end, project.date_beg, project.cost_p
+order by profit;
+
+--Вставка данных
+--Пункт 1
+--№1
+insert into employees (first_name_e, last_name_e, pather_name_e, position_e, salary_e)
+values
+('Иван', 'Петров', 'Владимирович', 'Java Developer', 817000);
+--№2
+insert into departments_employees (department_id, employee_id)
+values
+(5, currval('employees_id_e_seq'));
+--возврат для повтора задания
+delete from employees
+where id_e = currval('employees_id_e_seq');
+--Пункт 2
+do $$
+    begin
+        insert into project (name_p, cost_p, department_id, date_beg, date_end, date_end_real)
+        values
+        ('Построение логики взаимодействия между серверами', 1660000, 8, '2019-06-14', '2019-08-23', null);
+        
+        if (select ((date_end - date_beg) / 31) > 2 from project where id_p = currval('project_id_p_seq'))
+        then
+            raise exception 'Длительность проекта более 2-х месяцев. Откат транзакции.';
+        end if;
+    end;
+$$;
+--возврат для повтора задания
+delete from project
+where id_p = currval('project_id_p_seq');
+
+--Удаление данных
+--Пункт 1
+delete from departments
+where departments.name_d in (select departments.name_d
+from departments
+left join departments_employees on departments.id_d = departments_employees.department_id
+left join employees on departments_employees.employee_id = employees.id_e
+where departments.id_d not in (select project.department_id from project)
+group by departments.name_d having count(employees.first_name_e) > 3);
+--Доп вставка для того, чтобы в отделе было 4 человека
+insert into departments_employees (department_id, employee_id)
+values
+(8, 21),
+(8, 22);
+--Доп отстранение отдела от проекта
+delete from project
+where project.name_p = 'Оптимизация алгоритма быстрого ответа Yandex';
+--Доп проверка на количества людей в отделе
+select departments.id_d, departments.name_d, count(employees.first_name_e)
+from departments
+left join departments_employees on departments.id_d = departments_employees.department_id
+left join employees on departments_employees.employee_id = employees.id_e
+group by departments.id_d departments.name_d;
+--Пункт 2
+--1
+do $$
+    begin
+        delete from employees
+        where employees.id_e = (select employees.id_e
+        from employees
+        where employees.salary_e = (select min(employees.salary_e) from employees));
+        --2
+        raise exception 'Откат транзакции.';
+    end;
+$$
+--Поиск нового служащего с наименьшей зарплатой
+select employees.id_e
+from employees
+where employees.salary_e = (select min(employees.salary_e) from employees)
+
+--Модификация данных
+--Пункт 1
+update project
+set date_beg = now(), date_end = now()
+where project.name_p = 'Разработка мобильных приложений и сервисов Houlinso';
+--Пункт 2
+--1
+do $$
+    begin
+        update project
+        set name_p = 'Построение логики взаимодействия между серверами'
+        where project.name_p = 'Разработка мобильных приложений и сервисов Houlinso';
+        --2
+        raise exception 'Откат транзакции.';
+    end;
+$$;
+
+--ЛАБОРАТОРНАЯ №3
+--Представления
+--Пункт 1
+create view all_employees_work_date as
+select employees.last_name_e, employees.first_name_e, employees.pather_name_e
+from project
+left join departments_employees on project.department_id = departments_employees.department_id
+left join employees on departments_employees.employee_id = employees.id_e
+where project.date_beg > '2019-01-01' and project.date_beg < '2022-01-01'
+order by employees.last_name_e;
+--Вывод представления
+select * from all_employees_work_date;
+--Удаление представления
+drop view all_employees_work_date;
+--Пункт 2
+create view expenses_in_project as
+select project.name_p, sum(employees.salary_e) as expenses
+from project
+left join departments_employees on project.department_id = departments_employees.department_id
+left join employees on departments_employees.employee_id = employees.id_e
+group by project.name_p;
+--Вывод представления
+select * from expenses_in_project;
+--Удаление представления
+drop view expenses_in_project;
+
+--Хранимые процедуры
+--Пункт 1
+create function average_time()
+returns table(id int, average_time_in_day decimal)
+as $$
+    select project.department_id, avg(project.date_end - project.date_beg) as average_time_in_day
+    from project
+    group by project.department_id
+    order by project.department_id;
+$$ language sql;
+--Вывод результата
+select * from average_time();
+--Добавление проектов
+insert into project (name_p, cost_p, department_id, date_beg, date_end, date_end_real)
+values
+('Построение корпоративной базы данных на основе Outlook', 4500000, 6, '2021-12-21', '2022-04-22', '2022-05-12'),
+('Ускорение и оптимизая доставки и анализ полученных данных', 3520000, 3, '2020-05-03', '2020-06-21', '2020-07-13'),
+('Разработка систем безопасности', 7530000, 4, '2019-07-30', '2019-10-27', '2019-10-28'),
+('Разработка управления проектами', 8830000, 2, '2022-05-28', '2022-11-13', '2022-11-18');
+--Пункт 2
+create function search_employees(in id_employee1 int, in id_employee2 int)
+returns table(name_project varchar)
+as $$
+    select project.name_p from project
+    left join departments_employees on project.department_id = departments_employees.department_id
+    left join employees on departments_employees.employee_id = employees.id_e
+    where (employees.id_e = id_employee1 or employees.id_e = id_employee2) and
+    ((select departments_employees.department_id from departments_employees where departments_employees.employee_id = id_employee1) =
+    (select departments_employees.department_id from departments_employees where departments_employees.employee_id = id_employee2))
+    group by project.name_p
+    order by project.name_p;
+$$ language sql;
+--Вывод результата
+select * from search_employees(2, 3);
+--Добавление проекта
+insert into project (name_p, cost_p, department_id, date_beg, date_end, date_end_real)
+values
+('Разработка систем безопасности', 7530000, 4, '2019-07-30', '2019-10-27', '2019-10-28');
+--Пункт 3
+create function win_project(in id_department int)
+returns table(time_project int, name_project varchar)
+as $$
+declare
+    max_time int;
+    name_p varchar;
+begin
+    select max(project.date_end_real - project.date_beg) from project
+    left join departments_employees on project.department_id = departments_employees.department_id
+    left join employees on departments_employees.employee_id = employees.id_e
+    where departments_employees.department_id = id_department into max_time;
+    
+    select project.name_p from project
+    left join departments_employees on project.department_id = departments_employees.department_id
+    left join employees on departments_employees.employee_id = employees.id_e
+    where ((departments_employees.department_id = id_department) and (project.date_end_real - project.date_beg = max_time))
+    limit 1 into name_p;
+    
+    return query select max_time, name_p;
+end;
+$$ language plpgsql;
+--Вывод результата
+select * from win_project(1);
+--Добавление проектов
+insert into project (name_p, cost_p, department_id, date_beg, date_end, date_end_real)
+values
+('Построение корпоративной базы данных на основе Outlook', 4500000, 1, '2021-12-21', '2022-04-22', '2022-05-12'),
+('Разработка систем безопасности', 4700000, 1, '2021-12-21', '2022-08-22', '2022-09-12');
+
+--Триггеры
+--Пункт 1
+create trigger trigger_insert
+before insert on employees
+for each row
+execute function insert_employee();
+--Функция для триггера
+create function insert_employee()
+returns trigger
+as $$
+begin
+    if exists (select employees.last_name_e, employees.first_name_e, employees.pather_name_e
+    from employees
+    where ((new.last_name_e = employees.last_name_e) and (new.first_name_e = employees.first_name_e) and (new.pather_name_e = employees.pather_name_e)))
+    then
+        raise exception 'Человек под таким именем уже существует.';
+    else
+        return new;
+    end if;
+end;
+$$ language plpgsql;
+--Вставляем человека, который уже есть
+insert into employees (first_name_e, last_name_e, pather_name_e, position_e, salary_e)
+values
+('Петр', 'Иванов', 'Петрович', 'Администратор базы данных', 723000);
+--Пункт 2
+create trigger trigger_update
+before update on project
+for each row
+execute function update_employee();
+--Функция для триггера
+create function update_employee()
+returns trigger
+as $$
+begin
+    if (new.date_end_real < (select project.date_beg from project where project.name_p = old.name_p))
+    then
+        raise exception 'Дата окончания проекта меньше, чем дата начала.';
+    else
+        return new;
+    end if;
+end;
+$$ language plpgsql;
+--Обновляем на дату, которая меньше даты начала работы над проектом
+update project
+set date_end_real = '2020-12-21'
+where project.name_p = 'Разработка мобильных приложений и сервисов Houlinso';
+--Пункт 3
+create trigger trigger_delete
+before delete on project
+for each row
+execute function delete_employee();
+--Функция для триггера
+create function delete_employee()
+returns trigger
+as $$
+begin
+    if ((select project.date_end_real from project where project.name_p = old.name_p) is null)
+    then
+        raise exception 'Проект не закончен.';
+    else
+        return old;
+    end if;
+end;
+$$ language plpgsql;
+--Удаление незаконченного проекта
+delete from project
+where project.name_p = 'Оптимизация алгоритма быстрого ответа Yandex';
+
+--Курсоры
+--Пункт 1
+create function money_project(in date_begin date)
+returns table(dengi int)
+as $$
+declare
+    cur_va record;
+    summa int;
+    count_day int;
+    
+    sum_cursor cursor for (select project.date_beg, project.date_end_real, project.cost_p,
+    sum(employees.salary_e) as profit_all
+    from project
+    left join departments_employees on project.department_id = departments_employees.department_id
+    left join employees on departments_employees.employee_id = employees.id_e
+    group by project.cost_p, project.date_beg, project.date_end_real
+    order by project.date_beg);
+begin
+    summa = 0;
+    open sum_cursor;
+    
+    loop
+        count_day = now()::date - date_begin;
+        
+        fetch sum_cursor into cur_va;
+        exit when not found;
+        
+        if ((cur_va.date_beg is not null) and (cur_va.date_end_real is not null))
+        then
+            if (date_begin < cur_va.date_beg)
+            then
+                count_day = count_day - (cur_va.date_beg - date_begin);
+            end if;
+            
+            if (now()::date > cur_va.date_end_real)
+            then
+                count_day = count_day - (now()::date - cur_va.date_end_real);
+            end if;
+            
+            summa = summa + (cur_va.cost_p - cur_va.profit_all * count_day);
+        else
+            summa = summa + 0;
+        end if;
+    end loop;
+    
+    close sum_cursor;
+    
+    return query select summa;
+end;
+$$ language plpgsql;
+--Вывод результата
+select * from money_project('2020-12-03');]]></console>
+    </connection>
+  </component>
+  <component name="DBNavigator.Project.DatabaseEditorStateManager">
+    <last-used-providers>
+      <object-type object-type="VIEW" editor-provider="CODE" />
+    </last-used-providers>
+  </component>
+  <component name="DBNavigator.Project.DatabaseFileManager">
+    <open-files />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="cf6286bd-63b1-4c7c-b720-c6ed18d592d5" dataset="public.employees" active-filter-id="" />
+    <filter-actions connection-id="cf6286bd-63b1-4c7c-b720-c6ed18d592d5" dataset="pg_catalog.pg_attrdef" active-filter-id="" />
+    <filter-actions connection-id="cf6286bd-63b1-4c7c-b720-c6ed18d592d5" dataset="public.project" active-filter-id="" />
+    <filter-actions connection-id="cf6286bd-63b1-4c7c-b720-c6ed18d592d5" dataset="public.departments" active-filter-id="" />
+    <filter-actions connection-id="cf6286bd-63b1-4c7c-b720-c6ed18d592d5" dataset="information_schema.sql_features" active-filter-id="" />
+    <filter-actions connection-id="cf6286bd-63b1-4c7c-b720-c6ed18d592d5" dataset="public.all_employees_work_date" active-filter-id="" />
+    <filter-actions connection-id="cf6286bd-63b1-4c7c-b720-c6ed18d592d5" dataset="information_schema.sql_implementation_info" active-filter-id="" />
+  </component>
+  <component name="DBNavigator.Project.ExecutionManager">
+    <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.ObjectQuickFilterManager">
+    <last-used-operator value="EQUAL" />
+    <filters />
+  </component>
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+    <recently-used-interfaces />
+  </component>
+  <component name="DBNavigator.Project.Settings">
+    <connections>
+      <connection id="cf6286bd-63b1-4c7c-b720-c6ed18d592d5" active="true" signed="true">
+        <database>
+          <name value="Connection" />
+          <description value="" />
+          <database-type value="POSTGRES" />
+          <config-type value="BASIC" />
+          <database-version value="15.4" />
+          <driver-source value="BUNDLED" />
+          <driver-library value="" />
+          <driver value="" />
+          <url-type value="DATABASE" />
+          <host value="localhost" />
+          <port value="5432" />
+          <database value="postgres" />
+          <tns-folder value="" />
+          <tns-profile value="" />
+          <type value="USER_PASSWORD" />
+          <user value="postgres" />
+          <deprecated-pwd value="MjFTYWhhckQxMA==" />
+        </database>
+        <properties>
+          <auto-commit value="false" />
+        </properties>
+        <ssh-settings>
+          <active value="false" />
+          <proxy-host value="" />
+          <proxy-port value="22" />
+          <proxy-user value="" />
+          <deprecated-proxy-pwd value="" />
+          <auth-type value="PASSWORD" />
+          <key-file value="" />
+          <key-passphrase value="" />
+        </ssh-settings>
+        <ssl-settings>
+          <active value="false" />
+          <certificate-authority-file value="" />
+          <client-certificate-file value="" />
+          <client-key-file value="" />
+        </ssl-settings>
+        <details>
+          <charset value="UTF-8" />
+          <session-management value="true" />
+          <ddl-file-binding value="true" />
+          <database-logging value="true" />
+          <connect-automatically value="true" />
+          <restore-workspace value="true" />
+          <restore-workspace-deep value="false" />
+          <environment-type value="default" />
+          <connectivity-timeout value="30" />
+          <idle-time-to-disconnect value="30" />
+          <idle-time-to-disconnect-pool value="5" />
+          <credential-expiry-time value="10" />
+          <max-connection-pool-size value="7" />
+          <alternative-statement-delimiter value="" />
+        </details>
+        <object-filters hide-empty-schemas="false" hide-pseudo-columns="false">
+          <object-type-filter>
+            <object-type name="SCHEMA" enabled="true" />
+            <object-type name="USER" enabled="true" />
+            <object-type name="ROLE" enabled="true" />
+            <object-type name="PRIVILEGE" enabled="true" />
+            <object-type name="CHARSET" enabled="true" />
+            <object-type name="TABLE" enabled="true" />
+            <object-type name="VIEW" enabled="true" />
+            <object-type name="MATERIALIZED_VIEW" enabled="true" />
+            <object-type name="NESTED_TABLE" enabled="true" />
+            <object-type name="COLUMN" enabled="true" />
+            <object-type name="INDEX" enabled="true" />
+            <object-type name="CONSTRAINT" enabled="true" />
+            <object-type name="DATASET_TRIGGER" enabled="true" />
+            <object-type name="DATABASE_TRIGGER" enabled="true" />
+            <object-type name="SYNONYM" enabled="true" />
+            <object-type name="SEQUENCE" enabled="true" />
+            <object-type name="PROCEDURE" enabled="true" />
+            <object-type name="FUNCTION" enabled="true" />
+            <object-type name="PACKAGE" enabled="true" />
+            <object-type name="TYPE" enabled="true" />
+            <object-type name="TYPE_ATTRIBUTE" enabled="true" />
+            <object-type name="ARGUMENT" enabled="true" />
+            <object-type name="DIMENSION" enabled="true" />
+            <object-type name="CLUSTER" enabled="true" />
+            <object-type name="DBLINK" enabled="true" />
+          </object-type-filter>
+          <object-name-filters />
+        </object-filters>
+      </connection>
+    </connections>
+    <browser-settings>
+      <general>
+        <display-mode value="TABBED" />
+        <navigation-history-size value="100" />
+        <show-object-details value="false" />
+      </general>
+      <filters>
+        <object-type-filter>
+          <object-type name="SCHEMA" enabled="true" />
+          <object-type name="USER" enabled="true" />
+          <object-type name="ROLE" enabled="true" />
+          <object-type name="PRIVILEGE" enabled="true" />
+          <object-type name="CHARSET" enabled="true" />
+          <object-type name="TABLE" enabled="true" />
+          <object-type name="VIEW" enabled="true" />
+          <object-type name="MATERIALIZED_VIEW" enabled="true" />
+          <object-type name="NESTED_TABLE" enabled="true" />
+          <object-type name="COLUMN" enabled="true" />
+          <object-type name="INDEX" enabled="true" />
+          <object-type name="CONSTRAINT" enabled="true" />
+          <object-type name="DATASET_TRIGGER" enabled="true" />
+          <object-type name="DATABASE_TRIGGER" enabled="true" />
+          <object-type name="SYNONYM" enabled="true" />
+          <object-type name="SEQUENCE" enabled="true" />
+          <object-type name="PROCEDURE" enabled="true" />
+          <object-type name="FUNCTION" enabled="true" />
+          <object-type name="PACKAGE" enabled="true" />
+          <object-type name="TYPE" enabled="true" />
+          <object-type name="TYPE_ATTRIBUTE" enabled="true" />
+          <object-type name="ARGUMENT" enabled="true" />
+          <object-type name="DIMENSION" enabled="true" />
+          <object-type name="CLUSTER" enabled="true" />
+          <object-type name="DBLINK" enabled="true" />
+        </object-type-filter>
+      </filters>
+      <sorting>
+        <object-type name="COLUMN" sorting-type="NAME" />
+        <object-type name="FUNCTION" sorting-type="NAME" />
+        <object-type name="PROCEDURE" sorting-type="NAME" />
+        <object-type name="ARGUMENT" sorting-type="POSITION" />
+        <object-type name="TYPE ATTRIBUTE" sorting-type="POSITION" />
+      </sorting>
+      <default-editors>
+        <object-type name="VIEW" editor-type="SELECTION" />
+        <object-type name="PACKAGE" editor-type="SELECTION" />
+        <object-type name="TYPE" editor-type="SELECTION" />
+      </default-editors>
+    </browser-settings>
+    <navigation-settings>
+      <lookup-filters>
+        <lookup-objects>
+          <object-type name="SCHEMA" enabled="true" />
+          <object-type name="USER" enabled="false" />
+          <object-type name="ROLE" enabled="false" />
+          <object-type name="PRIVILEGE" enabled="false" />
+          <object-type name="CHARSET" enabled="false" />
+          <object-type name="TABLE" enabled="true" />
+          <object-type name="VIEW" enabled="true" />
+          <object-type name="MATERIALIZED VIEW" enabled="true" />
+          <object-type name="INDEX" enabled="true" />
+          <object-type name="CONSTRAINT" enabled="true" />
+          <object-type name="DATASET TRIGGER" enabled="true" />
+          <object-type name="DATABASE TRIGGER" enabled="true" />
+          <object-type name="SYNONYM" enabled="false" />
+          <object-type name="SEQUENCE" enabled="true" />
+          <object-type name="PROCEDURE" enabled="true" />
+          <object-type name="FUNCTION" enabled="true" />
+          <object-type name="PACKAGE" enabled="true" />
+          <object-type name="TYPE" enabled="true" />
+          <object-type name="DIMENSION" enabled="false" />
+          <object-type name="CLUSTER" enabled="false" />
+          <object-type name="DBLINK" enabled="true" />
+        </lookup-objects>
+        <force-database-load value="false" />
+        <prompt-connection-selection value="true" />
+        <prompt-schema-selection value="true" />
+      </lookup-filters>
+    </navigation-settings>
+    <dataset-grid-settings>
+      <general>
+        <enable-zooming value="true" />
+        <enable-column-tooltip value="true" />
+      </general>
+      <sorting>
+        <nulls-first value="true" />
+        <max-sorting-columns value="4" />
+      </sorting>
+      <audit-columns>
+        <column-names value="" />
+        <visible value="true" />
+        <editable value="false" />
+      </audit-columns>
+    </dataset-grid-settings>
+    <dataset-editor-settings>
+      <text-editor-popup>
+        <active value="false" />
+        <active-if-empty value="false" />
+        <data-length-threshold value="100" />
+        <popup-delay value="1000" />
+      </text-editor-popup>
+      <values-actions-popup>
+        <show-popup-button value="true" />
+        <element-count-threshold value="1000" />
+        <data-length-threshold value="250" />
+      </values-actions-popup>
+      <general>
+        <fetch-block-size value="100" />
+        <fetch-timeout value="30" />
+        <trim-whitespaces value="true" />
+        <convert-empty-strings-to-null value="true" />
+        <select-content-on-cell-edit value="true" />
+        <large-value-preview-active value="true" />
+      </general>
+      <filters>
+        <prompt-filter-dialog value="true" />
+        <default-filter-type value="BASIC" />
+      </filters>
+      <qualified-text-editor text-length-threshold="300">
+        <content-types>
+          <content-type name="Text" enabled="true" />
+          <content-type name="Properties" enabled="true" />
+          <content-type name="XML" enabled="true" />
+          <content-type name="DTD" enabled="true" />
+          <content-type name="HTML" enabled="true" />
+          <content-type name="XHTML" enabled="true" />
+          <content-type name="Java" enabled="true" />
+          <content-type name="SQL" enabled="true" />
+          <content-type name="PL/SQL" enabled="true" />
+          <content-type name="JSON" enabled="true" />
+          <content-type name="JSON5" enabled="true" />
+          <content-type name="Groovy" enabled="true" />
+          <content-type name="AIDL" enabled="true" />
+          <content-type name="YAML" enabled="true" />
+          <content-type name="Manifest" enabled="true" />
+        </content-types>
+      </qualified-text-editor>
+      <record-navigation>
+        <navigation-target value="VIEWER" />
+      </record-navigation>
+    </dataset-editor-settings>
+    <code-editor-settings>
+      <general>
+        <show-object-navigation-gutter value="false" />
+        <show-spec-declaration-navigation-gutter value="true" />
+        <enable-spellchecking value="true" />
+        <enable-reference-spellchecking value="false" />
+      </general>
+      <confirmations>
+        <save-changes value="false" />
+        <revert-changes value="true" />
+      </confirmations>
+    </code-editor-settings>
+    <code-completion-settings>
+      <filters>
+        <basic-filter>
+          <filter-element type="RESERVED_WORD" id="keyword" selected="true" />
+          <filter-element type="RESERVED_WORD" id="function" selected="true" />
+          <filter-element type="RESERVED_WORD" id="parameter" selected="true" />
+          <filter-element type="RESERVED_WORD" id="datatype" selected="true" />
+          <filter-element type="RESERVED_WORD" id="exception" selected="true" />
+          <filter-element type="OBJECT" id="schema" selected="true" />
+          <filter-element type="OBJECT" id="role" selected="true" />
+          <filter-element type="OBJECT" id="user" selected="true" />
+          <filter-element type="OBJECT" id="privilege" selected="true" />
+          <user-schema>
+            <filter-element type="OBJECT" id="table" selected="true" />
+            <filter-element type="OBJECT" id="view" selected="true" />
+            <filter-element type="OBJECT" id="materialized view" selected="true" />
+            <filter-element type="OBJECT" id="index" selected="true" />
+            <filter-element type="OBJECT" id="constraint" selected="true" />
+            <filter-element type="OBJECT" id="trigger" selected="true" />
+            <filter-element type="OBJECT" id="synonym" selected="false" />
+            <filter-element type="OBJECT" id="sequence" selected="true" />
+            <filter-element type="OBJECT" id="procedure" selected="true" />
+            <filter-element type="OBJECT" id="function" selected="true" />
+            <filter-element type="OBJECT" id="package" selected="true" />
+            <filter-element type="OBJECT" id="type" selected="true" />
+            <filter-element type="OBJECT" id="dimension" selected="true" />
+            <filter-element type="OBJECT" id="cluster" selected="true" />
+            <filter-element type="OBJECT" id="dblink" selected="true" />
+          </user-schema>
+          <public-schema>
+            <filter-element type="OBJECT" id="table" selected="false" />
+            <filter-element type="OBJECT" id="view" selected="false" />
+            <filter-element type="OBJECT" id="materialized view" selected="false" />
+            <filter-element type="OBJECT" id="index" selected="false" />
+            <filter-element type="OBJECT" id="constraint" selected="false" />
+            <filter-element type="OBJECT" id="trigger" selected="false" />
+            <filter-element type="OBJECT" id="synonym" selected="false" />
+            <filter-element type="OBJECT" id="sequence" selected="false" />
+            <filter-element type="OBJECT" id="procedure" selected="false" />
+            <filter-element type="OBJECT" id="function" selected="false" />
+            <filter-element type="OBJECT" id="package" selected="false" />
+            <filter-element type="OBJECT" id="type" selected="false" />
+            <filter-element type="OBJECT" id="dimension" selected="false" />
+            <filter-element type="OBJECT" id="cluster" selected="false" />
+            <filter-element type="OBJECT" id="dblink" selected="false" />
+          </public-schema>
+          <any-schema>
+            <filter-element type="OBJECT" id="table" selected="true" />
+            <filter-element type="OBJECT" id="view" selected="true" />
+            <filter-element type="OBJECT" id="materialized view" selected="true" />
+            <filter-element type="OBJECT" id="index" selected="true" />
+            <filter-element type="OBJECT" id="constraint" selected="true" />
+            <filter-element type="OBJECT" id="trigger" selected="true" />
+            <filter-element type="OBJECT" id="synonym" selected="true" />
+            <filter-element type="OBJECT" id="sequence" selected="true" />
+            <filter-element type="OBJECT" id="procedure" selected="true" />
+            <filter-element type="OBJECT" id="function" selected="true" />
+            <filter-element type="OBJECT" id="package" selected="true" />
+            <filter-element type="OBJECT" id="type" selected="true" />
+            <filter-element type="OBJECT" id="dimension" selected="true" />
+            <filter-element type="OBJECT" id="cluster" selected="true" />
+            <filter-element type="OBJECT" id="dblink" selected="true" />
+          </any-schema>
+        </basic-filter>
+        <extended-filter>
+          <filter-element type="RESERVED_WORD" id="keyword" selected="true" />
+          <filter-element type="RESERVED_WORD" id="function" selected="true" />
+          <filter-element type="RESERVED_WORD" id="parameter" selected="true" />
+          <filter-element type="RESERVED_WORD" id="datatype" selected="true" />
+          <filter-element type="RESERVED_WORD" id="exception" selected="true" />
+          <filter-element type="OBJECT" id="schema" selected="true" />
+          <filter-element type="OBJECT" id="user" selected="true" />
+          <filter-element type="OBJECT" id="role" selected="true" />
+          <filter-element type="OBJECT" id="privilege" selected="true" />
+          <user-schema>
+            <filter-element type="OBJECT" id="table" selected="true" />
+            <filter-element type="OBJECT" id="view" selected="true" />
+            <filter-element type="OBJECT" id="materialized view" selected="true" />
+            <filter-element type="OBJECT" id="index" selected="true" />
+            <filter-element type="OBJECT" id="constraint" selected="true" />
+            <filter-element type="OBJECT" id="trigger" selected="true" />
+            <filter-element type="OBJECT" id="synonym" selected="true" />
+            <filter-element type="OBJECT" id="sequence" selected="true" />
+            <filter-element type="OBJECT" id="procedure" selected="true" />
+            <filter-element type="OBJECT" id="function" selected="true" />
+            <filter-element type="OBJECT" id="package" selected="true" />
+            <filter-element type="OBJECT" id="type" selected="true" />
+            <filter-element type="OBJECT" id="dimension" selected="true" />
+            <filter-element type="OBJECT" id="cluster" selected="true" />
+            <filter-element type="OBJECT" id="dblink" selected="true" />
+          </user-schema>
+          <public-schema>
+            <filter-element type="OBJECT" id="table" selected="true" />
+            <filter-element type="OBJECT" id="view" selected="true" />
+            <filter-element type="OBJECT" id="materialized view" selected="true" />
+            <filter-element type="OBJECT" id="index" selected="true" />
+            <filter-element type="OBJECT" id="constraint" selected="true" />
+            <filter-element type="OBJECT" id="trigger" selected="true" />
+            <filter-element type="OBJECT" id="synonym" selected="true" />
+            <filter-element type="OBJECT" id="sequence" selected="true" />
+            <filter-element type="OBJECT" id="procedure" selected="true" />
+            <filter-element type="OBJECT" id="function" selected="true" />
+            <filter-element type="OBJECT" id="package" selected="true" />
+            <filter-element type="OBJECT" id="type" selected="true" />
+            <filter-element type="OBJECT" id="dimension" selected="true" />
+            <filter-element type="OBJECT" id="cluster" selected="true" />
+            <filter-element type="OBJECT" id="dblink" selected="true" />
+          </public-schema>
+          <any-schema>
+            <filter-element type="OBJECT" id="table" selected="true" />
+            <filter-element type="OBJECT" id="view" selected="true" />
+            <filter-element type="OBJECT" id="materialized view" selected="true" />
+            <filter-element type="OBJECT" id="index" selected="true" />
+            <filter-element type="OBJECT" id="constraint" selected="true" />
+            <filter-element type="OBJECT" id="trigger" selected="true" />
+            <filter-element type="OBJECT" id="synonym" selected="true" />
+            <filter-element type="OBJECT" id="sequence" selected="true" />
+            <filter-element type="OBJECT" id="procedure" selected="true" />
+            <filter-element type="OBJECT" id="function" selected="true" />
+            <filter-element type="OBJECT" id="package" selected="true" />
+            <filter-element type="OBJECT" id="type" selected="true" />
+            <filter-element type="OBJECT" id="dimension" selected="true" />
+            <filter-element type="OBJECT" id="cluster" selected="true" />
+            <filter-element type="OBJECT" id="dblink" selected="true" />
+          </any-schema>
+        </extended-filter>
+      </filters>
+      <sorting enabled="true">
+        <sorting-element type="RESERVED_WORD" id="keyword" />
+        <sorting-element type="RESERVED_WORD" id="datatype" />
+        <sorting-element type="OBJECT" id="column" />
+        <sorting-element type="OBJECT" id="table" />
+        <sorting-element type="OBJECT" id="view" />
+        <sorting-element type="OBJECT" id="materialized view" />
+        <sorting-element type="OBJECT" id="index" />
+        <sorting-element type="OBJECT" id="constraint" />
+        <sorting-element type="OBJECT" id="trigger" />
+        <sorting-element type="OBJECT" id="synonym" />
+        <sorting-element type="OBJECT" id="sequence" />
+        <sorting-element type="OBJECT" id="procedure" />
+        <sorting-element type="OBJECT" id="function" />
+        <sorting-element type="OBJECT" id="package" />
+        <sorting-element type="OBJECT" id="type" />
+        <sorting-element type="OBJECT" id="dimension" />
+        <sorting-element type="OBJECT" id="cluster" />
+        <sorting-element type="OBJECT" id="dblink" />
+        <sorting-element type="OBJECT" id="schema" />
+        <sorting-element type="OBJECT" id="role" />
+        <sorting-element type="OBJECT" id="user" />
+        <sorting-element type="RESERVED_WORD" id="function" />
+        <sorting-element type="RESERVED_WORD" id="parameter" />
+      </sorting>
+      <format>
+        <enforce-code-style-case value="true" />
+      </format>
+    </code-completion-settings>
+    <execution-engine-settings>
+      <statement-execution>
+        <fetch-block-size value="100" />
+        <execution-timeout value="20" />
+        <debug-execution-timeout value="600" />
+        <focus-result value="false" />
+        <prompt-execution value="false" />
+      </statement-execution>
+      <script-execution>
+        <command-line-interfaces />
+        <execution-timeout value="300" />
+      </script-execution>
+      <method-execution>
+        <execution-timeout value="30" />
+        <debug-execution-timeout value="600" />
+        <parameter-history-size value="10" />
+      </method-execution>
+    </execution-engine-settings>
+    <operation-settings>
+      <transactions>
+        <uncommitted-changes>
+          <on-project-close value="ASK" />
+          <on-disconnect value="ASK" />
+          <on-autocommit-toggle value="ASK" />
+        </uncommitted-changes>
+        <multiple-uncommitted-changes>
+          <on-commit value="ASK" />
+          <on-rollback value="ASK" />
+        </multiple-uncommitted-changes>
+      </transactions>
+      <session-browser>
+        <disconnect-session value="ASK" />
+        <kill-session value="ASK" />
+        <reload-on-filter-change value="false" />
+      </session-browser>
+      <compiler>
+        <compile-type value="KEEP" />
+        <compile-dependencies value="ASK" />
+        <always-show-controls value="false" />
+      </compiler>
+      <debugger>
+        <debugger-type value="ASK" />
+        <use-generic-runners value="true" />
+      </debugger>
+    </operation-settings>
+    <ddl-file-settings>
+      <extensions>
+        <mapping file-type-id="VIEW" extensions="vw" />
+        <mapping file-type-id="TRIGGER" extensions="trg" />
+        <mapping file-type-id="PROCEDURE" extensions="prc" />
+        <mapping file-type-id="FUNCTION" extensions="fnc" />
+        <mapping file-type-id="PACKAGE" extensions="pkg" />
+        <mapping file-type-id="PACKAGE_SPEC" extensions="pks" />
+        <mapping file-type-id="PACKAGE_BODY" extensions="pkb" />
+        <mapping file-type-id="TYPE" extensions="tpe" />
+        <mapping file-type-id="TYPE_SPEC" extensions="tps" />
+        <mapping file-type-id="TYPE_BODY" extensions="tpb" />
+      </extensions>
+      <general>
+        <lookup-ddl-files value="true" />
+        <create-ddl-files value="false" />
+        <synchronize-ddl-files value="true" />
+        <use-qualified-names value="false" />
+        <make-scripts-rerunnable value="true" />
+      </general>
+    </ddl-file-settings>
+    <general-settings>
+      <regional-settings>
+        <date-format value="MEDIUM" />
+        <number-format value="UNGROUPED" />
+        <locale value="SYSTEM_DEFAULT" />
+        <use-custom-formats value="false" />
+      </regional-settings>
+      <environment>
+        <environment-types>
+          <environment-type id="development" name="Development" description="Development environment" color="-2430209/-12296320" readonly-code="false" readonly-data="false" />
+          <environment-type id="integration" name="Integration" description="Integration environment" color="-2621494/-12163514" readonly-code="true" readonly-data="false" />
+          <environment-type id="production" name="Production" description="Productive environment" color="-11574/-10271420" readonly-code="true" readonly-data="true" />
+          <environment-type id="other" name="Other" description="" color="-1576/-10724543" readonly-code="false" readonly-data="false" />
+        </environment-types>
+        <visibility-settings>
+          <connection-tabs value="true" />
+          <dialog-headers value="true" />
+          <object-editor-tabs value="true" />
+          <script-editor-tabs value="false" />
+          <execution-result-tabs value="true" />
+        </visibility-settings>
+      </environment>
+    </general-settings>
+  </component>
+  <component name="DBNavigator.Project.StatementExecutionManager">
+    <execution-variables />
+  </component>
+</project>
